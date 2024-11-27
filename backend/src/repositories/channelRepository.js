@@ -7,4 +7,4 @@ const channelRepository={
 
 };
 
-export default channelRepository;
+export default channelRepository; 
