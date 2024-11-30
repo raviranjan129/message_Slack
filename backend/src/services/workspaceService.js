@@ -225,10 +225,10 @@ if(!isValidUser){
 }
 
         const isMember=isUserMemberOfworkspace(workspaceId,memberId);
-        if(!isMember){
+        if(isMember){
             throw new ClientError({
-                explanation:'User is not a member of the workspace',
-                message:'User is not a member of the workspace',
+                explanation:'User is already a member of the workspace',
+                message:'User is already a member of the workspace',
                 statusCode:StatusCodes.UNAUTHORIZED
             })
         }
