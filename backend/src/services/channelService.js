@@ -14,7 +14,7 @@ export const getChannelByIdService=async (channelId,userId)=>{
 console.log(channel);
 
 
-        if(!channel){
+        if(!channel || !channel.workspaceId){
             throw new ClientError({
                message:'Channel not found',
                explanation:"Channel not found",
