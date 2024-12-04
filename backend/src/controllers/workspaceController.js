@@ -133,7 +133,8 @@ export const addMemberToWorkspaceController=async(req,res)=>{
         const response = await addMemberToWorkspaceService(
             req.params.workspaceId,
             req.body.memberId,
-            req.body.role || 'member'
+            req.body.role || 'member',
+            req.user
         )
 
         return res
@@ -155,7 +156,8 @@ export const addChannelToWorkspaceController=async(req,res)=>{
     try {
         const response = await addChannelToWorkspaceService(
             req.params.workspaceId,
-            req.body.channelName,req.user
+            req.body.channelName,
+            req.user
         )
         return res
                 .status(StatusCodes.OK)

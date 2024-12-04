@@ -67,7 +67,7 @@ if(!isValidUser){
 }
 
 const isMemberAlreadyPartOfWorkspace=workspace.members.find(
-    (member)=> member.memberId==memberId
+    (member)=> member.memberId.toString()===memberId.toString()
 )
 
 if(isMemberAlreadyPartOfWorkspace){
