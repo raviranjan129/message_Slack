@@ -10,9 +10,8 @@ import ClientError from "../utils/errors/clientError.js";
 import ValidationError from "../utils/errors/validationError.js";
 
 const isUserAdminOfWorkspace = (workspace, userId) => {
-    console.log("user Id is ",userId);
-    console.log("workspace is ",workspace);
-    console.log(userId);
+    
+   
     const response = workspace.members.find(
       (member) =>
         (member.memberId.toString() === userId ||
@@ -258,7 +257,8 @@ export const addMemberToWorkspaceService = async (
       memberId,
       role
     );
-    addEmailtoMailQueue({
+
+     addEmailtoMailQueue({
       ...workspaceJoinMail(workspace),
       to: isValidUser.email
     });
