@@ -1,15 +1,23 @@
+
 import express from "express";
 import { StatusCodes } from "http-status-codes";
 
+import bullServerAdapter from "./config/bullBoardConfig.js";
 import connectDB from "./config/dbConfig.js";
 import { PORT } from "./config/serverConfig.js";
 import apiRouter from './routes/apiRoutes.js';
 
 
-
-
 const app = express();
+
+
+
+app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+
+
+
+app.use('/ui',bullServerAdapter.getRouter());
 
 app.use('/api',apiRouter);
 
