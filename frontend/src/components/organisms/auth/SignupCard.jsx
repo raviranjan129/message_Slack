@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +15,8 @@ const [signupForm,setSignupForm]=useState({
     password:'',
     username:''
 });
+
+const navigate=useNavigate();
 
     return (
       <Card className="w-full h-full" >
@@ -64,7 +67,11 @@ className="w-full"
 className='text-sm text-muted-foreground mt-4'
 >
     Already have an account ? {' '}
-    <span className='text-sky-500 hover:underline cursor-pointer '>Sign In</span>
+    <span className='text-sky-500 hover:underline cursor-pointer '
+    onClick={()=>navigate('/auth/signin')}
+    >
+        Sign In
+    </span>
 </p>
 </CardContent>
 
