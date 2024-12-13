@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { LucideLoader2, TriangleAlert } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -8,13 +9,17 @@ import { Separator } from '@/components/ui/separator';
 
 
 
-export const SignupCard=()=>{
+export const SignupCard=({
+    signupForm,
+    setSignupForm,
+    validationError,
+    onSignupFromSubmit,
+    error,
+    isPending,
+    isSuccess
+  })=>{
 
-const [signupForm,setSignupForm]=useState({
-    email:'',
-    password:'',
-    username:''
-});
+
 
 const navigate=useNavigate();
 
@@ -23,17 +28,57 @@ const navigate=useNavigate();
 <CardHeader>
 <CardTitle>Sign Up</CardTitle>
 <CardDescription>Sign up to access your account</CardDescription>
+
+{validationError && (
+    <div className='bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6' >
+
+<TriangleAlert className='size-5'/>
+        <p>{validationError.message}</p>
+    </div>
+
+)}
+
+{validationError && (
+    <div className='bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6' >
+
+<TriangleAlert className='size-5'/>
+        <p>{validationError.message}</p>
+    </div>
+
+)}
+
+
+{error && (
+    <div className='bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6' >
+
+<TriangleAlert className='size-5'/>
+        <p>{error.message}</p>
+    </div>
+
+)}
+
+{isSuccess && (
+    <div  className='bg-primary/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-primary mb-5'>
+        <p>Successfully signed up . you will be redirected to the login page in a few second
+
+            <LucideLoader2 className='animate-spin ml-2' />
+        </p>
+    </div>
+)}
+
+
+
 </CardHeader>
 
 <CardContent>
-<form className='space-y-3' >
+<form className='space-y-3' onSubmit={onSignupFromSubmit} >
     <Input 
     placeholder="Email"
     required
     onChange={(e)=>setSignupForm({...signupForm,email:e.target.value})}
     value={signupForm.email}
     type="email"
-    disabled={false}
+    disabled={isPending}
     />
 
 <Input 
@@ -42,7 +87,7 @@ const navigate=useNavigate();
     onChange={(e)=>setSignupForm({...signupForm,password:e.target.value})}
     value={signupForm.password}
     type="password"
-    disabled={false}
+    disabled={isPending}
     />
 
 <Input 
@@ -51,10 +96,10 @@ const navigate=useNavigate();
     onChange={(e)=>setSignupForm({...signupForm,username:e.target.value})}
     value={signupForm.username}
     type="text"
-    disabled={false}
+    disabled={isPending}
     />
 <Button
-disabled={false}
+disabled={isPending}
 size='lg'
 type='submit'
 className="w-full"
