@@ -5,59 +5,61 @@ import { useSignup } from '@/hooks/apis/auth/useSignup';
 
 import { SignupCard } from './SignupCard';
 
-export const SignupContainer=()=>{
-    const [signupForm,setSignupForm]=useState({
-        email:'',
-        password:'',
-        username:''
+export const SignupContainer = () => {
+    const navigate = useNavigate();
+    
+    const [signupForm, setSignupForm] = useState({
+        email: '',
+        password: '',
+        
+        username: ''
     });
 
-    const navigate = useNavigate();
+    const [validationError, setValidationError] = useState(null);
 
-    const [validationError,setValidationError]=useState(null);
+    const { isPending, isSuccess, error, signupMutation } = useSignup();
 
-    const { isPending,isSuccess,error,signupMutation}=useSignup();
-
-    async function onSignupFromSubmit(e) {
+    async function onSignupFormSubmit(e) {
         e.preventDefault();
-        console.log('Signup form submitted',signupForm);
-        setValidationError({message:'All fields are required'});
+        console.log('Signup form submitted', signupForm);
 
-        if(!signupForm.email || !signupForm.password || !signupForm.username){
-            console.log('All fields are required');
+        if(!signupForm.email || !signupForm.password  || !signupForm.username) {
+            console.error('All fields are required');
+            setValidationError({ message: 'All fields are required' });
             return;
         }
 
+       
 
         setValidationError(null);
 
         await signupMutation({
-            email:signupForm.email,
-            password:signupForm.password,
-            username:signupForm.username
+            email: signupForm.email,
+            password: signupForm.password,
+            username: signupForm.username
         });
 
-        
+
     }
 
-useEffect(()=>{
-if(isSuccess){
-   setTimeout(() => {
-    navigate('/auth/signin');
-   }, 3000);
-}
-},[isSuccess,navigate ]);
+    useEffect(() => {
+        if(isSuccess) {
+            setTimeout(() => {
+                navigate('/auth/signin');
+            }, 3000);
+        }
+            
+    }, [isSuccess, navigate]);
 
-    return(
-<SignupCard 
-error={error}
-isPending={isPending}
-isSuccess={isSuccess}
-signupForm={signupForm}
- setSignupForm={setSignupForm} 
- validationError={validationError}
- onSignupFromSubmit={onSignupFromSubmit}
- />
+    return (
+        <SignupCard 
+            error={error}
+            isPending={isPending}
+            isSuccess={isSuccess}
+            signupForm={signupForm} 
+            setSignupForm={setSignupForm} 
+            validationError={validationError} 
+            onSignupFormSubmit={onSignupFormSubmit}
+        />
     );
-
 };

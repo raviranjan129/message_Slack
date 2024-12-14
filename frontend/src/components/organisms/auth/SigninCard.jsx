@@ -29,7 +29,7 @@ return (
 <Input
 placeholder="Enter Your Email"
 required={true}
-onchange={(e)=>setSigninForm({...signinForm,email:e.target.value})}
+onChange={(e)=>setSigninForm({...signinForm,email:e.target.value})}
 value={signinForm.email}
 type='email'
 disabled={false}
@@ -39,7 +39,7 @@ disabled={false}
 <Input 
 placeholder="Password"
 required={true}
-onchange={(e)=>setSigninForm({...signinForm,password:e.target.value})}
+onChange={(e)=>setSigninForm({...signinForm,password:e.target.value})}
 value={signinForm.password}
 type='password'
 disabled={false}
