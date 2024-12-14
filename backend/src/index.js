@@ -19,7 +19,7 @@ const app = express();
 const server=createServer(app);
 const io= new Server(server);
 
-app.use(cors)
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -30,7 +30,7 @@ app.use('/ui',bullServerAdapter.getRouter());
 
 app.use('/api',apiRouter);
 
-app.get("/ping", (req, res) => {
+app.get("/ping", (req, res) => { 
   return res.status(StatusCodes.OK).json({ message: "pong" });
 });
 

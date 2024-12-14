@@ -10,7 +10,7 @@ export const signUp=async(req,res)=>{
 const user = await signUpService(req.body);
 return res
         .status(StatusCodes.CREATED)
-        .json(successResponse(user,'User created successfullyl'));
+        .json(successResponse(user,'User created successfully'));
 
     } catch (error) {
         console.log("User controller error",error);
