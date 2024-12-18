@@ -7,7 +7,8 @@ export const AuthContextProvider=({Children})=>{
 
   const [auth,setAuth]=useState({
     user:null,
-    token:null
+    token:null,
+    isLoading:true
   });
 
     useEffect(()=>{
@@ -16,7 +17,8 @@ export const AuthContextProvider=({Children})=>{
         if(user && token){
             setAuth({
                 user:JSON.parse(user),
-                token
+                token,
+                isLoading:false
             });
         }
     },[]);
