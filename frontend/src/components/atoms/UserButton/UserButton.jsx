@@ -1,11 +1,27 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { LogOutIcon, SettingsIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '@/hooks/context/useAuth';
+import { useToast } from '@/hooks/use-toast';
 
 export const UserButton = () => {
-    const { auth } = useAuth();
+
+    const navigate=useNavigate();
+    const { auth,logout } = useAuth();
+    const {toast}=useToast();
+
+    async function  handleLogout() {
+        await logout();
+        toast({
+            title:'Successfully signed out',
+            message:'You will be redirected to the signin page in a few seconds',
+            type:'Success'
+        });
+        navigate('/auth/signin');
+        
+    }
 
     return (
         <DropdownMenu>
@@ -22,7 +38,7 @@ export const UserButton = () => {
                     Settings
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="flex items-center">
+                <DropdownMenuItem className="flex items-center" onClick={handleLogout}>
                     <LogOutIcon className="mr-2 h-4 w-4" />
                     Logout
                 </DropdownMenuItem>
