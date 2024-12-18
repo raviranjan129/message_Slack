@@ -14,8 +14,8 @@ function App() {
   <QueryClientProvider client={queryClient} >
     <AppContextProvider>
     
-<AppRoutes/>
-   
+
+   <AppRoutes/>
 
 
    </AppContextProvider>

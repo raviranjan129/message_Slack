@@ -1,31 +1,33 @@
-
-export default function combineContext(...providers){
-   /**
-    * this combines multiple context provider together and returns a single context provider;
-    */
-
-return ({Children})=>{
-    return providers.reduceRight((accumulator,Currentprovider)=>{
-        return <Currentprovider>{accumulator}</Currentprovider>;
-    } , Children);  /**initial value */
-};
-
+export default function combineContext(...providers) {
+    /**
+     * This combines multiple context provider together and returns a single context provider
+     */
+    return ({ children }) => {
+        return providers.reduceRight((accumulator, Currentprovider) => {
+            return <Currentprovider>{accumulator}</Currentprovider>;
+        }, children /* Initial Value */);
+    };
 }
 
-/**
+
+/** [A, B, C, D]
  * <A>
- *   <B>
+ *  <B>
  *      <C>
- *         <D>
- *            {children}
- *            <D>
- *         <C>
- *     <B>
- * <A> 
+ *          <D>
+ *          {children}
+ *         </D>
+ *      </C>
+ *   </B>
+ * </A>
+ */
+
+/**
+ * <BModified />
  */
 
 /**
  * <Combined>
  * {children}
- * <Combined>
+ * </Combined>
  */
