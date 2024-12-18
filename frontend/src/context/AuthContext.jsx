@@ -20,6 +20,12 @@ export const AuthContextProvider=({Children})=>{
                 token,
                 isLoading:false
             });
+        }else{
+           setAuth({
+            user:null,
+            token:null,
+            isLoading:false
+           }); 
         }
     },[]);
 
