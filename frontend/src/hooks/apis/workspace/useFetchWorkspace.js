@@ -9,7 +9,7 @@ export const useFetchWorkspace=()=>{
 
     const {isFetching,isSuccess,error,data:workspaces}=useQuery({
         queryFn:()=>fetchWorkspaceRequest({token:auth?.token}),
-        queryKey:'fetchWorkspaces', //for caching mechanism;
+        queryKey:['fetchWorkspaces'], //for caching mechanism;
         staleTime:3000
     });
 
