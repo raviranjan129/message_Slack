@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { LogOutIcon, SettingsIcon } from 'lucide-react';
+import { LogOutIcon, PencilIcon, SettingsIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '@/hooks/context/useAuth';
@@ -33,6 +33,11 @@ export const UserButton = () => {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
+            <DropdownMenuItem className="flex items-center">
+                    <PencilIcon className="mr-2 h-4 w-4" />
+                    Create Workspace
+                </DropdownMenuItem>
+
                 <DropdownMenuItem className="flex items-center">
                     <SettingsIcon className="mr-2 h-4 w-4" />
                     Settings

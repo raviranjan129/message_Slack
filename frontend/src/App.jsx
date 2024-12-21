@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { Modals } from '@/components/organisms/Modals/Modals';
 import { Toaster } from '@/components/ui/toaster';
 import { AppRoutes } from '@/Routes';
 
@@ -16,7 +17,7 @@ function App() {
     
 
    <AppRoutes/>
-
+<Modals/>
 
    </AppContextProvider>
    <Toaster/>
