@@ -2,12 +2,12 @@ import {  createContext, useState } from 'react';
 
 const CreateWorkspaceContext=createContext();
 
-export const CreateWorksapceContextProvider=({Children})=>{
+export const CreateWorksapceContextProvider=({children})=>{
     const [openCreateWorkspaceModal,setOpenCreateWorkspaceModal]=useState(false);
 
 return(
     <CreateWorkspaceContext.Provider value={{openCreateWorkspaceModal,setOpenCreateWorkspaceModal}}>
-        {Children}
+        {children}
     </CreateWorkspaceContext.Provider>
 );
 

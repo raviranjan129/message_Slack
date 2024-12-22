@@ -25,7 +25,7 @@ setOpenCreateWorkspaceModal(false);
         try {
         const data= await createWorkspaceMutation({name:workspacename});
         console.log('Created the worksapce',data);
-            // navigate('/workspaces');
+            navigate(`/workspaces/${data._id}`);
         } catch (error) {
             console.log('Not able to create a new workspace',error);
         }finally{

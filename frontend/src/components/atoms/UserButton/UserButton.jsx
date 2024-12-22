@@ -4,6 +4,7 @@ import { LogOutIcon, PencilIcon, SettingsIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '@/hooks/context/useAuth';
+import { useCreateWorkspaceModal } from '@/hooks/context/useCreateWorkspaceModal';
 import { useToast } from '@/hooks/use-toast';
 
 export const UserButton = () => {
@@ -11,6 +12,12 @@ export const UserButton = () => {
     const navigate=useNavigate();
     const { auth,logout } = useAuth();
     const {toast}=useToast();
+
+    const {setOpenCreateWorkspaceModal} = useCreateWorkspaceModal();
+
+    function openWorkspaceCreateModal(){
+        setOpenCreateWorkspaceModal(true);
+    }
 
     async function  handleLogout() {
         await logout();
@@ -33,7 +40,7 @@ export const UserButton = () => {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-            <DropdownMenuItem className="flex items-center">
+            <DropdownMenuItem className="flex items-center" onClick={openWorkspaceCreateModal}>
                     <PencilIcon className="mr-2 h-4 w-4" />
                     Create Workspace
                 </DropdownMenuItem>

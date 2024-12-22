@@ -22,7 +22,7 @@ src="https://www.digitalmesh.com/blog/wp-content/uploads/2020/05/404-error.jpg" 
 
 <Button
 onClick={()=>navigate(-1)}
- className="mt-4" 
+ className="mt-4 cursor-pointer" 
  variant="outline"  
  
  >
