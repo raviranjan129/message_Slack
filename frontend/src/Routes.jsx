@@ -18,7 +18,7 @@ import { WorkspaceLayout } from './pages/Workspace/Layout';
     <Route path='/auth/signup' element={<Auth><SignupContainer/></Auth>}/>
     <Route path='/auth/signin' element={<Auth><SigninContainer/></Auth>}/>
     <Route path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
-    <Route path="/workspaces/:workspaceId" element={<ProtectedRoute><WorkspaceLayout/> Workspace</ProtectedRoute>} />
+    <Route path="/workspaces/:workspaceId" element={<ProtectedRoute><WorkspaceLayout/></ProtectedRoute>} />
     <Route path='/*' element={<Notfound/>}/>
    </Routes>
    );

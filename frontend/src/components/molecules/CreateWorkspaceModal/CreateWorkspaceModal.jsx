@@ -12,7 +12,7 @@ export const CreateWorkspaceModal=()=>{
     const {openCreateWorkspaceModal,setOpenCreateWorkspaceModal}=useCreateWorkspaceModal();
   const {isPending,createWorkspaceMutation}=  useCreateWorkspace();
 
-    const [workspacename,setWorkspacename]=useState();
+    const [workspacename,setWorkspacename]=useState('');
 
     const navigate=useNavigate();
 
@@ -20,7 +20,7 @@ export const CreateWorkspaceModal=()=>{
 setOpenCreateWorkspaceModal(false);
     }
 
-    async function handleFromSubmit(e){
+    async function handleFormSubmit(e){
         e.preventDefault();
         try {
         const data= await createWorkspaceMutation({name:workspacename});
@@ -48,7 +48,7 @@ setOpenCreateWorkspaceModal(false);
         </DialogTitle>
     </DialogHeader>
 
-<form onSubmit={handleFromSubmit}>
+<form onSubmit={handleFormSubmit}>
     <Input
     required
     disabled={isPending}

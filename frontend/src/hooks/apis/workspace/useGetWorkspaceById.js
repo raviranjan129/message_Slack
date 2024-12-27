@@ -6,9 +6,10 @@ import { useAuth } from '@/hooks/context/useAuth';
 export const useGetWorkspaceById=(id)=>{
 
     const {auth} = useAuth();
-    const {isFetching,isSuccess,error,data:workspace}=useQuery({
+    const {isFetching,isSuccess,error,data:workspaces}=useQuery({
+        queryKey:[`fetchWorkspaceById-${id}`],
         queryFn:(id)=>fetchWorkspaceDetailsRequest({workspaceId:id,token:auth?.token}),
-queryKey:[`fetchWorkspaceById-${id}`],
+
 staleTime:10000
     });
 
@@ -16,6 +17,6 @@ staleTime:10000
         isFetching,
         isSuccess,
         error,
-        workspace
+        workspaces
     };
 };
