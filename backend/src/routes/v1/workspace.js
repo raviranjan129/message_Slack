@@ -12,7 +12,7 @@ const router=express.Router();
 router.post('/',isAuthenticated,validate(createWorkspaceSchema),createWorkspaceController);
 router.get('/',isAuthenticated,getWorkspacesUserIsMemberOfController);
 
-router.delete('/:workspaceId',isAuthenticated,deleteWorkspaceController)
+router.delete('/:workspaceId',isAuthenticated,deleteWorkspaceController);
 router.get('/:workspaceId',isAuthenticated,getWorkspaceController);
 
 router.get('/join/:joinCode',isAuthenticated,getWorkspaceByJoinCodeController);

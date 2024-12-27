@@ -12,6 +12,7 @@ return res
         .status(StatusCodes.CREATED)
         .json(successResponse(user,'User created successfully'));
 
+        
     } catch (error) {
         console.log("User controller error",error);
         if(error.StatusCodes){
@@ -26,6 +27,7 @@ return res
 export const signIn=async(req,res)=>{
     try {
         const response=await signInService(req.body);
+        console.log(response)
         return res.status(StatusCodes.OK).json(successResponse(response,'user signed in successfully'));
     } catch (error) {
         console.log('user controller error',error);

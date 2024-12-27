@@ -11,6 +11,7 @@ import { createJWT } from './../utils/common/authUtils.js';
 export const signUpService = async(data)=>{
     try {
         const newUser=await userRepository.create(data);
+        console.log(newUser);
         return newUser;
     } catch (error) {
         console.log("User Se service error",error);
@@ -64,6 +65,7 @@ try {
             email:user.email,
             token:createJWT({id: user._id, email:user.email})
         }
+        
 
 } catch (error) {
     console.log(error);
