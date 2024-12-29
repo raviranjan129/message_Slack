@@ -12,16 +12,16 @@ import ValidationError from "../utils/errors/validationError.js";
 const isUserAdminOfWorkspace = (workspace, userId) => {
     
    
-    const response = workspace.members.find(
-      (member) =>
-        (member.memberId.toString() === userId ||
-          member.memberId._id.toString() === userId) &&
-        member.role === 'admin'
-    );
-    console.log(response);
-    
-    return response;
-  };
+  const response = workspace.members.find(
+    (member) =>
+      (member.memberId.toString() === userId ||
+        member.memberId._id.toString() === userId) &&
+      member.role === 'admin'
+  );
+  console.log(response);
+  
+  return response;
+};
 
 export const isUserMemberOfworkspace = (workspace, userId) => {
   return workspace.members.find(

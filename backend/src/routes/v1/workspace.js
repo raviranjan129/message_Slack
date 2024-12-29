@@ -13,7 +13,7 @@ router.post('/',isAuthenticated,validate(createWorkspaceSchema),createWorkspaceC
 router.get('/',isAuthenticated,getWorkspacesUserIsMemberOfController);
 
 router.delete('/:workspaceId',isAuthenticated,deleteWorkspaceController);
-router.get('/:workspaceId',isAuthenticated,getWorkspaceController);
+router.get('/:workspaceId', isAuthenticated, getWorkspaceController);
 
 router.get('/join/:joinCode',isAuthenticated,getWorkspaceByJoinCodeController);
 router.put('/:workspaceId',isAuthenticated,updateWorksapceController);

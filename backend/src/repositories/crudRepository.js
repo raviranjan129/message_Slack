@@ -12,6 +12,7 @@ return newDoc;
         },
         getById:async function (id){
             const doc = await model.findById(id);
+            
             return doc;
         },
         delete:async function(id){
