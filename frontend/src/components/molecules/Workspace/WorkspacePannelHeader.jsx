@@ -55,7 +55,7 @@ Active Workspace
     </DropdownMenuItem>
 
 <DropdownMenuSeparator/>
-    <DropdownMenuItem className='cursor-pointer py-2'>
+    <DropdownMenuItem className='cursor-pointer py-2 font-semibold'>
       Invite people to {workspace?.name}
     </DropdownMenuItem>
     </>
