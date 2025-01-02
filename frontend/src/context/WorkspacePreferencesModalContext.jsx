@@ -7,10 +7,12 @@ export const WorkspacePreferencesModalContextProvider= ({children})=>{
 
 const [openPreferences,setOpenPreferences]=useState(false);
 
-
+const [initialValue,setInitialValue]=useState('');
     return (
-        <WorkspacePreferencesModalContext.Provider value={{openPreferences,setOpenPreferences}}>
+        <WorkspacePreferencesModalContext.Provider value={{openPreferences,setOpenPreferences,initialValue,setInitialValue}}>
             {children}
         </WorkspacePreferencesModalContext.Provider>
     );
 };
+
+export default WorkspacePreferencesModalContext;
