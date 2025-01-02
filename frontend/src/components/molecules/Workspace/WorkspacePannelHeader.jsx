@@ -13,7 +13,7 @@ const workspacemembers=workspace?.members;
 
 const {auth}=useAuth();
 
-const {setOpenPreferences}=useWorkspacePreferencesModal();
+const {setInitialValue,setOpenPreferences}=useWorkspacePreferencesModal();
 
 const isLoggedInUserAdminOfWorkspace=workspacemembers?.find(member => member.memberId===auth?.user?._id && member.role ==='admin');
 
@@ -53,7 +53,14 @@ Active Workspace
 
 {isLoggedInUserAdminOfWorkspace && (
     <>
-    <DropdownMenuItem className='cursor-pointer py-2' onClick={()=>setOpenPreferences(true)}>
+    <DropdownMenuItem
+     className='cursor-pointer py-2' 
+     onClick={()=>{
+        setOpenPreferences(true);
+        setInitialValue(workspace?.name);
+     }
+
+     }>
         Preferences
     </DropdownMenuItem>
 
