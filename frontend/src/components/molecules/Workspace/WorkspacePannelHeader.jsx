@@ -1,5 +1,6 @@
 
 import {  ChevronDownIcon, ListFilterIcon, SquarePenIcon } from 'lucide-react';
+import { useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent ,DropdownMenuItem,DropdownMenuSeparator,DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -9,6 +10,8 @@ import { useWorkspacePreferencesModal } from '@/hooks/context/UseWorkspacePrefer
 
 export const WorkspacePanelHeader=({workspace}) =>{
 
+    const {setWorkspace} = useWorkspacePreferencesModal();
+
 const workspacemembers=workspace?.members;
 
 const {auth}=useAuth();
@@ -16,6 +19,10 @@ const {auth}=useAuth();
 const {setInitialValue,setOpenPreferences}=useWorkspacePreferencesModal();
 
 const isLoggedInUserAdminOfWorkspace=workspacemembers?.find(member => member.memberId===auth?.user?._id && member.role ==='admin');
+
+useEffect(()=>{
+    setWorkspace(workspace);
+},[]);
 
 return(
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5 ">

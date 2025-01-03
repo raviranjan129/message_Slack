@@ -40,17 +40,17 @@ export const UserButton = () => {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-            <DropdownMenuItem className="flex items-center" onClick={openWorkspaceCreateModal}>
+            <DropdownMenuItem className="flex items-center cursor-pointer" onClick={openWorkspaceCreateModal}>
                     <PencilIcon className="mr-2 h-4 w-4" />
                     Create Workspace
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="flex items-center">
+                <DropdownMenuItem className="flex items-center cursor-pointer">
                     <SettingsIcon className="mr-2 h-4 w-4" />
                     Settings
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="flex items-center" onClick={handleLogout}>
+                <DropdownMenuItem className="flex items-center cursor-pointer" onClick={handleLogout}>
                     <LogOutIcon className="mr-2 h-4 w-4" />
                     Logout
                 </DropdownMenuItem>
