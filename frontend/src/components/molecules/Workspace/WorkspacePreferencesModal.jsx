@@ -8,6 +8,7 @@ import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogT
 import { Input } from '@/components/ui/input';
 import { useDeleteWorkspace } from '@/hooks/apis/workspace/useDeleteWorkspace';
 import { useUpdateWorkspace } from '@/hooks/apis/workspace/useUpdateWorkspace';
+import { useConfirm } from '@/hooks/context/useConfirm';
 import { useWorkspacePreferencesModal } from '@/hooks/context/UseWorkspacePreferencesModal';
 import { useToast } from '@/hooks/use-toast';
 
@@ -29,9 +30,17 @@ export const WorkspacePreferencesModal = ()=>{
     const [renameValue,setRenameValue] =useState(workspace?.name);
     const {deleteWorkspacemutation} = useDeleteWorkspace(workspaceId);
 
+   const {confirmation,ConfirmDialog}= useConfirm({title:'Do You want to Delete?',message:'This action cannot be undone'});
+
+   const {confirmation:updateConfirmation,ConfirmDialog:UpdateDialog}=useConfirm({title:'Do you want to update the workspace',message:'This can be undone'});
+
     async function handleFormSubmit(e){
         e.preventDefault();
         try {
+            const ok = await updateConfirmation();
+            if(!ok){
+                return;
+            }
             await updateWorkspaceMutation(renameValue);
             queryClient.invalidateQueries(`fetchWorkspaceById-${workspace?._id}`);
             setOpenPreferences(false);
@@ -59,6 +68,10 @@ setRenameValue(workspace?.name);
 
  async function handleDelete(){
 try {
+    const ok=await confirmation();
+    if(!ok){
+        return;
+    }
     await deleteWorkspacemutation();
     navigate('/home');
     queryClient.invalidateQueries('fetchWorkspaces');
@@ -77,6 +90,9 @@ try {
 }
 
     return (
+        <>
+        <ConfirmDialog/>
+        <UpdateDialog/>
         <Dialog open={openPreferences} onOpenChange={handleClose}>
 <DialogContent>
     <DialogHeader>
@@ -159,5 +175,6 @@ onClick={handleDelete}
     </div>
 </DialogContent>
         </Dialog>
+        </>
     );
 };
