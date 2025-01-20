@@ -44,7 +44,7 @@ onOpenChange={handleClose}
                     Create Channel
                 </Button>
             </div>
-         
+        
         </form>
     </DialogContent>
 </Dialog>
