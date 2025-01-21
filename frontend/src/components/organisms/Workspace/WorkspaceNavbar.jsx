@@ -1,4 +1,4 @@
-import { InfoIcon, LucideLoader2, SearchIcon } from 'lucide-react';
+import { InfoIcon, SearchIcon } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
