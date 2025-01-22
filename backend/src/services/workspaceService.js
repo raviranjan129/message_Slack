@@ -24,8 +24,12 @@ const isUserAdminOfWorkspace = (workspace, userId) => {
 };
 
 export const isUserMemberOfworkspace = (workspace, userId) => {
+  console.log(userId);
   return workspace.members.find(
-    (member) => member.memberId.toString() === userId
+    (member) => {
+      console.log('member id ', member.memberId.toString())
+      return member.memberId._id.toString()===userId
+    }
   );
 };
 
@@ -78,6 +82,18 @@ export const createWorkspaceService = async (workspaceData) => {
   }
 };
 
+
+export const resetWorkspacejoinCodeService=async(workspaceId,userId)=>{
+  try {
+    const newJoinCode=uuidv4().substring(0,6).toUpperCase();
+    const updatedWorkspace=await updateWorkspaceService(workspaceId,{Joincode:newJoinCode},userId);
+    return updatedWorkspace;
+  } catch (error) {
+    console.log('resetWorkspaceJoinCodeService error',error);
+    throw error;
+  }
+}
+
 export const getWorkspacesUserIsMemberOfService = async (userId) => {
   try {
     const response =
@@ -125,7 +141,7 @@ export const deleteWorkspaceService = async (workspaceId, userId) => {
 
 export const getWorkspaceService = async (workspaceId, userId) => {
   try {
-    const workspace = await workspaceRepository.getById(workspaceId);
+    const workspace = await workspaceRepository.getWorkspaceDetailsById(workspaceId);
     if (!workspace) {
       throw new ClientError({
         explanation: "Invalid data sent from the client",
