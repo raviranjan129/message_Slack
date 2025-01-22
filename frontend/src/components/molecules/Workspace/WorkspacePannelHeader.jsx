@@ -2,11 +2,11 @@
 import {  ChevronDownIcon, ListFilterIcon, SquarePenIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { WorkspaceInviteModal } from '@/components/organisms/Modals/WorkspaceInviteModal';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent ,DropdownMenuItem,DropdownMenuSeparator,DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/context/useAuth';
 import { useWorkspacePreferencesModal } from '@/hooks/context/UseWorkspacePreferencesModal';
-import { WorkspaceInviteModal } from '@/components/organisms/Modals/WorkspaceInviteModal';
 
 
 export const WorkspacePanelHeader=({workspace}) =>{
@@ -35,6 +35,7 @@ return(
     setOpenInviteModal={setOpenInviteModal}
     workspaceName={workspace?.name}
     joinCode={workspace?.joinCode}
+    workspaceId={workspace?._id}
     />
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5 ">
 
