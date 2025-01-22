@@ -18,7 +18,7 @@ const {auth}=useAuth();
 
 const {setInitialValue,setOpenPreferences}=useWorkspacePreferencesModal();
 
-const isLoggedInUserAdminOfWorkspace=workspacemembers?.find(member => member.memberId===auth?.user?._id && member.role ==='admin');
+const isLoggedInUserAdminOfWorkspace=workspacemembers?.find(member => member.memberId._id===auth?.user?._id && member.role ==='admin');
 
 useEffect(()=>{
     setWorkspace(workspace);
