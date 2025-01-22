@@ -1,16 +1,19 @@
 
 import {  ChevronDownIcon, ListFilterIcon, SquarePenIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent ,DropdownMenuItem,DropdownMenuSeparator,DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/context/useAuth';
 import { useWorkspacePreferencesModal } from '@/hooks/context/UseWorkspacePreferencesModal';
+import { WorkspaceInviteModal } from '@/components/organisms/Modals/WorkspaceInviteModal';
 
 
 export const WorkspacePanelHeader=({workspace}) =>{
 
     const {setWorkspace} = useWorkspacePreferencesModal();
+
+    const [openInviteModal,setOpenInviteModal] = useState(false);
 
 const workspacemembers=workspace?.members;
 
@@ -25,6 +28,14 @@ useEffect(()=>{
 },[]);
 
 return(
+
+    <>
+    <WorkspaceInviteModal 
+    openInviteModal={openInviteModal}
+    setOpenInviteModal={setOpenInviteModal}
+    workspaceName={workspace?.name}
+    joinCode={workspace?.joinCode}
+    />
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5 ">
 
         <DropdownMenu>
@@ -72,7 +83,9 @@ Active Workspace
     </DropdownMenuItem>
 
 <DropdownMenuSeparator/>
-    <DropdownMenuItem className='cursor-pointer py-2 font-semibold'>
+    <DropdownMenuItem className='cursor-pointer py-2 font-semibold'
+    onClick={()=>setOpenInviteModal(true)}
+    >
       Invite people to {workspace?.name}
     </DropdownMenuItem>
     </>
@@ -92,5 +105,7 @@ Active Workspace
 </div>
 
     </div>
+
+    </>
 );
 };
