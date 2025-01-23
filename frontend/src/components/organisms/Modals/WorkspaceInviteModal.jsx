@@ -14,7 +14,7 @@ export const WorkspaceInviteModal=({openInviteModal,setOpenInviteModal, workspac
 
    async function handleCopy(){
 
-    const inviteLink=`${window.location.origin}/join/${joinCode}`;
+    const inviteLink=`${joinCode}`;  //window.location.origin}/join/
 
     await navigator.clipboard.writeText(inviteLink);
 
@@ -34,7 +34,7 @@ export const WorkspaceInviteModal=({openInviteModal,setOpenInviteModal, workspac
             type:'success'
         });
     } catch (error) {
-        console.log('Errir in resetting join code',error);
+        console.log('Error in resetting join code',error);
     }
     }
 
@@ -64,6 +64,17 @@ export const WorkspaceInviteModal=({openInviteModal,setOpenInviteModal, workspac
                         <CopyIcon className='size-4 ml-2'/>
                     </Button>
                     </div>
+
+                    {/** link to redirect the user in a new tab to the join page*/}
+
+                    <a
+                        href={`/workspaces/join/${workspaceId}`}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='text-blue-500'
+                    >
+                            Redirect to join page
+                        </a>
 
                     <div className="flex items-center justify-center w-full">
                 

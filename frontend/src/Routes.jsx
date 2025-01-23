@@ -7,6 +7,7 @@ import { Notfound } from '@/pages/NotFound/Notfound';
 import { ProtectedRoute } from './components/molecules/ProtectedRoute/ProtectedRoute';
 import { SigninContainer } from './components/organisms/auth/SigninContainer';
 import { SignupContainer } from './components/organisms/auth/SignupContainer';
+import { JoinPage } from './pages/Workspace/JoinPage';
 import { WorkspaceLayout } from './pages/Workspace/Layout';
 
 
@@ -22,6 +23,7 @@ import { WorkspaceLayout } from './pages/Workspace/Layout';
     <Route  path='/workspaces/:workspaceId/channels/:channelId'
     element={<ProtectedRoute>Channel</ProtectedRoute>}
     />
+    <Route  path='/workspaces/join/:workspaceId' element={<JoinPage/>} />
     <Route path='/*' element={<Notfound/>}/>
    </Routes>
    );
