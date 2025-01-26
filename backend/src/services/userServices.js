@@ -2,7 +2,10 @@
 import bcrypt from 'bcrypt';
 import { StatusCodes } from "http-status-codes";
 
+import { ENABLE_EMAIL_VERIFICATION } from '../config/serverConfig.js';
+import { addEmailtoMailQueue } from '../producer/mailQueueProducer.js';
 import userRepository from "../repositories/userRepository.js";
+import { verifyEmailMail } from '../utils/common/mailObject.js';
 import ClientError from "../utils/errors/clientError.js";
 import ValidationError from "../utils/errors/validationError.js";
 import { createJWT } from './../utils/common/authUtils.js';
@@ -10,8 +13,18 @@ import { createJWT } from './../utils/common/authUtils.js';
 
 export const signUpService = async(data)=>{
     try {
-        const newUser=await userRepository.create(data);
-        console.log(newUser);
+        const newUser=await userRepository.signUpUser(data); //changing create with signUpUser due to making verification code null after verification of the link;
+       
+        if(ENABLE_EMAIL_VERIFICATION){           //this should send a verification mail link to the user 
+            addEmailtoMailQueue(
+               {
+                ...verifyEmailMail(newUser.verificationToken),
+                to:newUser.email
+               }
+            )
+        };
+
+
         return newUser;
     } catch (error) {
         console.log("User Se service error",error);
@@ -33,6 +46,42 @@ export const signUpService = async(data)=>{
         }
     }
 }
+
+export const verifyTokenService=async(token)=>{
+    try {
+        const user =await userRepository.getByToken(token);
+        if(!user){
+            throw new ClientError({
+                explanation:'Invalid data sent from the client',
+                message:'Invalid token',
+                statusCode:StatusCodes.BAD_REQUEST
+            });
+        }
+
+        //check if the token has expired or not 
+
+        if(user.verificationTokenExpiry <Date.now()){
+            throw new ClientError({
+                explanation:'Invalid data sent from the client',
+                message:'Token has expired',
+                statusCode:StatusCodes.BAD_REQUEST
+            });
+        }
+
+        user.isVerified=true;
+        user.verificationToken=null;
+        user.verificationTokenExpiry=null;
+        await user.save();
+
+        return user;
+
+    } catch (error) {
+        console.log('User service error',error);
+        throw error;
+    }
+}
+
+
 
 export const signInService=async(data)=>{
 try {

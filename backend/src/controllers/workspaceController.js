@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 
 import { addChannelToWorkspaceService, addMemberToWorkspaceService, createWorkspaceService, deleteWorkspaceService, getWorkspaceByJoinCodeService, getWorkspaceService, getWorkspacesUserIsMemberOfService, joinWorkspaceService, resetWorkspacejoinCodeService, updateWorkspaceService } from "../services/workspaceService.js";
 import { customErrorResponse, internalErrorResponse, successResponse } from "../utils/common/responseObjecs.js";
+import { verifyTokenService } from "../services/userServices.js";
 
 export const createWorkspaceController=async(req,res)=>{
 try {
@@ -207,5 +208,20 @@ export const joinWorkspaceController=async (req,res)=>{
         }
 
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(internalErrorResponse);
+    }
+}
+
+
+export const verifyEmailController=async(req,res)=>{
+    try {
+        const response=await verifyTokenService(req.params.token);
+        return res.status(StatusCodes.OK).json(successResponse(response,'Email verified successfully'));
+    } catch (error) {
+        console.log('verify email controller error',error);
+        if(error.statusCode){
+            return res.status(error.statusCode).json(customErrorResponse(error));
+        }
+
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(internalErrorResponse(error));
     }
 }

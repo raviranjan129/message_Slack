@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import mongoose from "mongoose";
+import {v4 as uuidv4} from 'uuid';
 
 const userSchema=new mongoose.Schema({
     email:{
@@ -30,13 +31,24 @@ const userSchema=new mongoose.Schema({
     avatar:{
         type:String,
 
-    }
+    },
+    isVerified:{
+        type:Boolean,
+        default:false
+    },
+    verificationToken:{
+        type:String
+    },
+    verificationTokenExpiry:{
+        type:Date
+    },
 
 
 },{timestamps:true});
 
 
 userSchema.pre('save',function saveUser(next){
+   if(this.isNew){     //this check is made bcz of making verification code null after making the verification link true;
     const user = this;
     const SALT=bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(user.password,SALT);
@@ -44,6 +56,12 @@ userSchema.pre('save',function saveUser(next){
     user.password=hashedPassword;
 
     user.avatar=`https://robohash.org/${user.username}`;
+
+    user.verificationToken=uuidv4().substring(0, 10).toUpperCase();
+
+    user.verificationTokenExpiry=Date.now() + 3600000;   //1 hr
+   }
+
     next();
 })
 
