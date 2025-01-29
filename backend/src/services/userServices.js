@@ -15,7 +15,7 @@ export const signUpService = async(data)=>{
     try {
         const newUser=await userRepository.signUpUser(data); //changing create with signUpUser due to making verification code null after verification of the link;
        
-        if(ENABLE_EMAIL_VERIFICATION){           //this should send a verification mail link to the user 
+        if(ENABLE_EMAIL_VERIFICATION =='true'){           //this should send a verification mail link to the user 
             addEmailtoMailQueue(
                {
                 ...verifyEmailMail(newUser.verificationToken),

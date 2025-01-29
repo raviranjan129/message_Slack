@@ -10,28 +10,30 @@ import ClientError from "../utils/errors/clientError.js";
 import ValidationError from "../utils/errors/validationError.js";
 
 const isUserAdminOfWorkspace = (workspace, userId) => {
-    
-   
+  if (!workspace || !workspace.members) return false;
+
   const response = workspace.members.find(
     (member) =>
+      member.memberId &&
       (member.memberId.toString() === userId ||
-        member.memberId._id.toString() === userId) &&
-      member.role === 'admin'
+        member.memberId._id?.toString() === userId) &&
+      member.role === "admin"
   );
+
   console.log(response);
-  
   return response;
 };
 
-export const isUserMemberOfworkspace = (workspace, userId) => {
-  console.log(userId);
-  return workspace.members.find(
-    (member) => {
-      console.log('member id ', member.memberId.toString())
-      return member.memberId._id.toString()===userId
-    }
-  );
+export const isUserMemberOfWorkspace = (workspace, userId) => {
+  if (!workspace || !workspace.members) return false;
+
+  return workspace.members.find((member) => {
+    if (!member.memberId) return false; // Skip if memberId is missing
+    console.log("member id", member.memberId.toString());
+    return member.memberId._id?.toString() === userId;
+  });
 };
+
 
 const isChannelAlreadyPartofWorkspace = (workspace, channelName) => {
   return workspace.channels.find(
@@ -149,7 +151,7 @@ export const getWorkspaceService = async (workspaceId, userId) => {
         statusCode: StatusCodes.NOT_FOUND
       });
     }
-    const isMember = isUserMemberOfworkspace(workspace, userId);
+    const isMember = isUserMemberOfWorkspace(workspace, userId);
 
     if (!isMember) {
       throw new ClientError({
@@ -176,7 +178,7 @@ export const getWorkspaceByJoinCodeService = async (joinCode, userId) => {
         statusCode: StatusCodes.FORBIDDEN
       });
     }
-    const isMember = isUserMemberOfworkspace(workspace, userId);
+    const isMember = isUserMemberOfWorkspace(workspace, userId);
 
     if (!isMember) {
       throw new ClientError({
@@ -260,7 +262,7 @@ export const addMemberToWorkspaceService = async (
         statusCode: StatusCodes.NOT_FOUND
       });
     }
-    const isMember = isUserMemberOfworkspace(workspace, memberId);
+    const isMember = isUserMemberOfWorkspace(workspace, memberId);
     if (isMember) {
       throw new ClientError({
         explanation: "User is already a member of the workspace",

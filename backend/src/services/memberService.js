@@ -3,7 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import workspaceRepository from "../repositories/workspaceRepository.js"
 import ClientError from "../utils/errors/clientError.js";
 import { userRepository } from './../repositories/userRepository.js';
-import { isUserMemberOfworkspace } from "./workspaceService.js";
+import { isUserMemberOfWorkspace } from "./workspaceService.js";
+
 
 export const isMemberPartofWorkspaceService=async(workspaceId,memberId)=>{
 
@@ -17,7 +18,7 @@ if(!workspace){
     })
 }
 
-    const isUserAMember = isUserMemberOfworkspace(workspace,memberId);
+    const isUserAMember = isUserMemberOfWorkspace(workspace,memberId);
 
     if(!isUserAMember){
         throw new ClientError({

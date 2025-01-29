@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 
+import { verifyTokenService } from "../services/userServices.js";
 import { addChannelToWorkspaceService, addMemberToWorkspaceService, createWorkspaceService, deleteWorkspaceService, getWorkspaceByJoinCodeService, getWorkspaceService, getWorkspacesUserIsMemberOfService, joinWorkspaceService, resetWorkspacejoinCodeService, updateWorkspaceService } from "../services/workspaceService.js";
 import { customErrorResponse, internalErrorResponse, successResponse } from "../utils/common/responseObjecs.js";
-import { verifyTokenService } from "../services/userServices.js";
 
 export const createWorkspaceController=async(req,res)=>{
 try {
@@ -62,25 +62,26 @@ export const deleteWorkspaceController = async (req, res) => {
     }
   };
 
-  export const getWorkspaceController=async(req,res)=>{
+  export const getWorkspaceController = async (req, res) => {
     try {
-        const response = await getWorkspaceService(
-            req.params.workspaceId,
-            req.user
-        );
-        return res.status(StatusCodes.OK).json(successResponse(response,'Workspace fetched successfully'))
+      const response = await getWorkspaceService(
+        req.params.workspaceId,
+        req.user
+      );
+      return res
+        .status(StatusCodes.OK)
+        .json(successResponse(response, 'Workspace deleted successfully'));
     } catch (error) {
-        console.log("Get workspace controller error",error);
-        if(error.statusCode){
-            return res.status(error.statusCode).json(customErrorResponse(error));
-        }
-
-        return res
-                .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                .json(internalErrorResponse(error));
-
+      console.log('Get workspace controller error', error);
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(customErrorResponse(error));
+      }
+  
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(internalErrorResponse(error));
     }
-  }
+  };
 
 export const getWorkspaceByJoinCodeController= async(req,res)=>{
     try {
