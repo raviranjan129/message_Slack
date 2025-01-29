@@ -9,6 +9,7 @@ import { SigninContainer } from './components/organisms/auth/SigninContainer';
 import { SignupContainer } from './components/organisms/auth/SignupContainer';
 import { JoinPage } from './pages/Workspace/JoinPage';
 import { WorkspaceLayout } from './pages/Workspace/Layout';
+import { Channel } from './pages/Workspace/Channel/Channel';
 
 
 
@@ -21,7 +22,7 @@ import { WorkspaceLayout } from './pages/Workspace/Layout';
     <Route path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
     <Route path="/workspaces/:workspaceId" element={<ProtectedRoute><WorkspaceLayout/></ProtectedRoute>} />
     <Route  path='/workspaces/:workspaceId/channels/:channelId'
-    element={<ProtectedRoute>Channel</ProtectedRoute>}
+   element={<ProtectedRoute><WorkspaceLayout><Channel/></WorkspaceLayout></ProtectedRoute>}
     />
     <Route  path='/workspaces/join/:workspaceId' element={<JoinPage/>} />
     <Route path='/*' element={<Notfound/>}/>

@@ -21,4 +21,4 @@ export const useJoinWorkspaceRequest = (workspaceId) => {
         isPending,
         error
     };
-};
+}; 
