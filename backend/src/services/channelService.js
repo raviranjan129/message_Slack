@@ -35,7 +35,7 @@ export const getChannelByIdService = async (channelId, userId) => {
       });
     }
 
-    const messages=await messageRepository. getPaginatedMessages({channelId},1,20)
+    const messages=await messageRepository.getPaginatedMessages({channelId},1,20)
 console.log('Channel in service ',channel);
 
 return {
