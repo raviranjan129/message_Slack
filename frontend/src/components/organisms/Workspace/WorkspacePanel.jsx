@@ -11,6 +11,7 @@ import { useCreateChannelModal } from '@/hooks/context/useCreateChannelModal';
 export const WorkspacePanel = () => {
 
     const { workspaceId } = useParams();
+    
 
     const { setOpenCreateChannelModal } = useCreateChannelModal();
     const { workspace, isFetching, isSuccess } = useGetWorkspaceById(workspaceId);
@@ -73,14 +74,17 @@ export const WorkspacePanel = () => {
                 label="Direct messages"
                 onIconClick={() => {}}
             >
-               {workspace?.members?.map((item, index) => {
-    if (!item?.memberId) {
-        console.warn(`Invalid member at index ${index}:`, item);
-        return null; // Skip invalid members
-    }
-    return <UserItem key={item.memberId._id} label={item.memberId.username} id={item.memberId._id} image={item.memberId.avatar} />;
+               {workspace?.members?.map((item) => {
+    if (!item.memberId) return null; // Skip rendering if memberId is null
+    return (
+        <UserItem
+            key={item.memberId._id}
+            label={item.memberId.username}
+            id={item.memberId._id}
+            image={item.memberId.avatar}
+        />
+    );
 })}
-
             </WorkspacePanelSection>
         </div>
     );

@@ -7,9 +7,9 @@ import { Notfound } from '@/pages/NotFound/Notfound';
 import { ProtectedRoute } from './components/molecules/ProtectedRoute/ProtectedRoute';
 import { SigninContainer } from './components/organisms/auth/SigninContainer';
 import { SignupContainer } from './components/organisms/auth/SignupContainer';
+import { Channel } from './pages/Workspace/Channel/Channel';
 import { JoinPage } from './pages/Workspace/JoinPage';
 import { WorkspaceLayout } from './pages/Workspace/Layout';
-import { Channel } from './pages/Workspace/Channel/Channel';
 
 
 
