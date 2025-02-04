@@ -1,9 +1,9 @@
 import { Loader2Icon, TriangleAlertIcon } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 
-import { useGetChannelById } from '@/hooks/apis/Channels/useGetChannelById';
-import { ChatInput } from '@/components/molecules/ChatInput/ChatInput';
 import { ChannelHeader } from '@/components/molecules/Channel/ChannelHeader';
+import { ChatInput } from '@/components/molecules/ChatInput/ChatInput';
+import { useGetChannelById } from '@/hooks/apis/Channels/useGetChannelById';
 
 export const Channel=()=>{
 

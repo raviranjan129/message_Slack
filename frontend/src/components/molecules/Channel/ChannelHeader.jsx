@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown } from 'react-icons/fa';
+
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 export const ChannelHeader =({name})=>{
 

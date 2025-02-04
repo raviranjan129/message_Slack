@@ -1,12 +1,13 @@
 import 'quill/dist/quill.snow.css';
 
+import { ImageIcon } from 'lucide-react';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
+import {PiTextAa} from 'react-icons/pi';
+
 import { Button } from '@/components/ui/button';
 
-import {PiTextAa} from 'react-icons/pi'
 import { Hint } from '../Hint/Hint';
-import { ImageIcon } from 'lucide-react';
 
 
 export const Editor=({
