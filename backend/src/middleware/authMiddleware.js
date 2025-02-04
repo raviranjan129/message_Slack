@@ -37,7 +37,7 @@ next();
    } catch (error) {
     console.log('auth middleware error',error);
 
-    if(error.name==='jsonWebTokenError'){
+    if(error.name==='jsonWebTokenError' || error.name ==='TokenExpiredError'){
         return res.status(StatusCodes.FORBIDDEN).json(
             customErrorResponse({
                 explanation:'Invalid data sent from the client',
