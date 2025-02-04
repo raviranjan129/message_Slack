@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 import {PiTextAa} from 'react-icons/pi'
+import { Hint } from '../Hint/Hint';
+import { ImageIcon } from 'lucide-react';
+
 
 export const Editor=({
     variant='create',
@@ -92,9 +95,28 @@ useEffect(() => {
                       <div ref={containerRef}/>
 
                       <div className='flex px-2 pb-2 z-[5] '>
-                           <Button size="iconSm" variant="ghost" disabled={false} onClick={toggleToolbar} >
-                                   <PiTextAa className='size-4' />
-                           </Button>
+                         <Hint label={isToolbarVisible? 'Show toolbar':'Hide toolbar'} side='top' >
+                         <Button 
+                         size="iconSm"
+                          variant="ghost"
+                           disabled={false}
+                            onClick={toggleToolbar} 
+                            
+                            >
+                               <PiTextAa className='size-5' />
+                         </Button>
+                         </Hint>
+
+                         <Hint label="Image">
+                            <Button 
+                            size="iconSm"
+                            variant="ghost"
+                            disabled={false}
+                            onClick={()=>{}}
+                            >
+                                <ImageIcon className='size-4'/>
+                            </Button>
+                         </Hint>
                       </div>
                        
            </div>
