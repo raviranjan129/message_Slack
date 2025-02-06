@@ -3,6 +3,7 @@ import 'quill/dist/quill.snow.css';
 import { ImageIcon } from 'lucide-react';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
+import {MdSend} from 'react-icons/md';
 import {PiTextAa} from 'react-icons/pi';
 
 import { Button } from '@/components/ui/button';
@@ -93,7 +94,7 @@ useEffect(() => {
     return(
         <div className='flex flex-col'>
            <div className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white transition focus-within:'>
-                      <div ref={containerRef}/>
+                      <div className='h-full ql-custom' ref={containerRef}/>
 
                       <div className='flex px-2 pb-2 z-[5] '>
                          <Hint label={isToolbarVisible? 'Show toolbar':'Hide toolbar'} side='top' >
@@ -118,6 +119,20 @@ useEffect(() => {
                                 <ImageIcon className='size-4'/>
                             </Button>
                          </Hint>
+
+                         <Hint label='send Messages'>
+                            <Button
+                            size='iconSm'
+                            className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white'
+                            onClick={()=>{
+                                onSubmit({body:JSON.stringify(quillRef.current?.getContents())});
+                            }}
+                            disabled={false}
+                            >
+                                <MdSend className='size-4'/>
+                            </Button>
+                         </Hint>
+                         
                       </div>
                        
            </div>
