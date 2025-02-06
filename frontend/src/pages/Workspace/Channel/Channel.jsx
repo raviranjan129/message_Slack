@@ -36,6 +36,7 @@ export const Channel=()=>{
 
             <div className='flex-1'>
             <ChatInput/>
+            
             </div>
               
            
