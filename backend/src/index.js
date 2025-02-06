@@ -18,9 +18,13 @@ import apiRouter from './routes/apiRoutes.js';
 const app = express();
 
 const server=createServer(app);
-const io= new Server(server);
+const io= new Server(server,{
+  cors:{
+    origin:'*'                        //cors issue for any kind of io connection
+  }
+});
 
-app.use(cors())
+app.use(cors());     //cors issue for any kind of http connection
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -38,7 +42,7 @@ app.get("/ping", (req, res) => {
 });
 
 io.on('connection',(socket)=>{
-  // console.log('a user connected',socket.id);
+  console.log('a user connected',socket.id);
   // socket.on('messageFromClient',(data)=>{
   //   console.log('Message from client',data);
 
