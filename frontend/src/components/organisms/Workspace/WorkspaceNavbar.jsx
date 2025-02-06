@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { useGetWorkspaceById } from '@/hooks/apis/workspace/useGetWorkspaceById';
-import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
 import { useAuth } from '@/hooks/context/useAuth';
+import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
 
 export const WorkspaceNavbar=()=>{
 
