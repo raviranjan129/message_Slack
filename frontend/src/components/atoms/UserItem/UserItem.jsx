@@ -1,7 +1,7 @@
-import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { cva } from 'class-variance-authority';
 import { Link } from 'react-router-dom';
 
+import { AvatarFallback ,AvatarImage} from '@/components/ui/avatar';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
