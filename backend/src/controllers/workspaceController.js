@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 
 import { verifyTokenService } from "../services/userServices.js";
 import { addChannelToWorkspaceService, addMemberToWorkspaceService, createWorkspaceService, deleteWorkspaceService, getWorkspaceByJoinCodeService, getWorkspaceService, getWorkspacesUserIsMemberOfService, joinWorkspaceService, resetWorkspacejoinCodeService, updateWorkspaceService } from "../services/workspaceService.js";
-import { customErrorResponse, internalErrorResponse, successResponse } from "../utils/common/responseObjecs.js";
+import { customErrorResponse, internalErrorResponse, successResponse } from "../utils/common/responseObjects.js";
 
 export const createWorkspaceController=async(req,res)=>{
 try {

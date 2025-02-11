@@ -2,7 +2,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { signInService, signUpService } from '../services/userServices.js';
-import { customErrorResponse, internalErrorResponse, successResponse } from '../utils/common/responseObjecs.js';
+import { customErrorResponse, internalErrorResponse, successResponse } from '../utils/common/responseObjects.js';
 
 export const signUp=async(req,res)=>{
     try {
