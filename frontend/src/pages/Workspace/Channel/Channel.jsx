@@ -8,18 +8,28 @@ import { Message } from '@/components/molecules/Message/Message';
 import { useGetChannelById } from '@/hooks/apis/Channels/useGetChannelById';
 import { useGetChannelMessages } from '@/hooks/apis/Channels/useGetChannelMessages';
 import { useSocket } from '@/hooks/context/useSocket';
+import { useChannelMessages } from '@/hooks/context/useChannelMessages';
 
 export const Channel = () => {
     const { channelId } = useParams();
     const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
     const { joinChannel } = useSocket();
-    const { messages } = useGetChannelMessages(channelId);
+    const { messages,isSuccess } = useGetChannelMessages(channelId);
+    const {setMessageList,messageList}=useChannelMessages();
   
     useEffect(() => {
       if (!isFetching && !isError) {
         joinChannel(channelId);
       }
     }, [isFetching, isError, channelId]);
+
+
+    useEffect(()=>{
+if(isSuccess){
+  console.log('channel messages fetched');
+  setMessageList(messages);
+}
+},[isSuccess,messages,setMessageList]);
   
     if (isFetching) {
       return (
@@ -28,6 +38,9 @@ export const Channel = () => {
         </div>
       );
     }
+
+
+    
   
     if (isError) {
       return (
@@ -45,7 +58,7 @@ export const Channel = () => {
   
         {/* Messages Container */}
         <div className="flex-1 overflow-y-auto px-4 space-y-2">
-          {messages?.map((message) => (
+          {messageList?.map((message) => (
             <Message
               key={message._id}
               body={message.body}
@@ -56,7 +69,7 @@ export const Channel = () => {
           ))}
         </div>
   
-        {/* Chat Input at Bottom */}
+       
         <div className="sticky bottom-0 bg-white border-t p-4">
           <ChatInput />
         </div>
