@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { Loader2Icon, TriangleAlertIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -7,21 +8,31 @@ import { ChatInput } from '@/components/molecules/ChatInput/ChatInput';
 import { Message } from '@/components/molecules/Message/Message';
 import { useGetChannelById } from '@/hooks/apis/Channels/useGetChannelById';
 import { useGetChannelMessages } from '@/hooks/apis/Channels/useGetChannelMessages';
-import { useSocket } from '@/hooks/context/useSocket';
 import { useChannelMessages } from '@/hooks/context/useChannelMessages';
+import { useSocket } from '@/hooks/context/useSocket';
+
 
 export const Channel = () => {
     const { channelId } = useParams();
+    const queryclient=useQueryClient();
     const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
     const { joinChannel } = useSocket();
     const { messages,isSuccess } = useGetChannelMessages(channelId);
     const {setMessageList,messageList}=useChannelMessages();
   
+
+    useEffect(()=>{
+console.log('channelId',channelId);
+  queryclient.invalidateQueries('getPaginatedMessages');
+    },[channelId]);
+
+    
     useEffect(() => {
       if (!isFetching && !isError) {
+        
         joinChannel(channelId);
       }
-    }, [isFetching, isError, channelId]);
+    }, [isFetching, isError,joinChannel, channelId]);
 
 
     useEffect(()=>{
@@ -57,7 +68,7 @@ if(isSuccess){
         <ChannelHeader name={channelDetails?.name} />
   
         {/* Messages Container */}
-        <div className="flex-1 overflow-y-auto px-4 space-y-2">
+        <div className="flex-5 overflow-y-auto px-5 gap-y-2">
           {messageList?.map((message) => (
             <Message
               key={message._id}
@@ -65,12 +76,13 @@ if(isSuccess){
               authorImage={message.senderId?.avatar}
               authorName={message.senderId?.username}
               createdAt={message.createdAt}
+              image={message.image}
             />
           ))}
         </div>
   
        
-        <div className="sticky bottom-0 bg-white border-t p-4">
+        <div className="flex-1">
           <ChatInput />
         </div>
       </div>
