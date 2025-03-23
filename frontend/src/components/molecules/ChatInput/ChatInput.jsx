@@ -25,7 +25,7 @@ export const ChatInput=()=>{
     }
 
     return(
-     <div className='px-5 w-full'>
+     <div className='px-5 w-full '>
         <Editor
         placeholder={()=>{}}
         onSubmit={handleSubmit}

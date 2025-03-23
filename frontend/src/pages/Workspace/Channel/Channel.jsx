@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Loader2Icon, TriangleAlertIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ChannelHeader } from '@/components/molecules/Channel/ChannelHeader';
@@ -21,6 +21,14 @@ export const Channel = () => {
     const {setMessageList,messageList}=useChannelMessages();
   
 
+    const messageContainerListRef=useRef(null);
+         
+    useEffect(()=>{
+      if(messageContainerListRef.current){
+        messageContainerListRef.current.scrollTop=messageContainerListRef.current.scrollHeight;
+      }
+    },[messageList]);
+
     useEffect(()=>{
 console.log('channelId',channelId);
   queryclient.invalidateQueries('getPaginatedMessages');
@@ -39,6 +47,7 @@ console.log('channelId',channelId);
 if(isSuccess){
   console.log('channel messages fetched');
   setMessageList(messages);
+  
 }
 },[isSuccess,messages,setMessageList]);
   
@@ -68,7 +77,12 @@ if(isSuccess){
         <ChannelHeader name={channelDetails?.name} />
   
         {/* Messages Container */}
-        <div className="flex-5 overflow-y-auto px-5 gap-y-2">
+        <div 
+        ref={messageContainerListRef}
+        className="flex-5 overflow-y-auto px-5 gap-y-2"
+        
+        > {/** to make message scrollable */}
+
           {messageList?.map((message) => (
             <Message
               key={message._id}

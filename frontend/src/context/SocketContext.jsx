@@ -17,6 +17,7 @@ const socket = io(import.meta.env.VITE_BACKEND_SOCKET_URL);
 socket.on('NewMessageReceived',(data)=>{
     console.log('New message received ',data);
     setMessageList([...messageList,data]);
+    // 
 });
 
 async function joinChannel(channelId){
